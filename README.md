@@ -36,6 +36,7 @@ This project is designed as a learning resource for Golang development, focusing
 2. Install dependencies
    ```bash
    go mod download
+   go install github.com/air-verse/air@latest
    ```
 
 3. Run the application with Docker Compose
