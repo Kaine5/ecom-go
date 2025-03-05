@@ -39,16 +39,30 @@ This project is designed as a learning resource for Golang development, focusing
    ```
 
 3. Run the application with Docker Compose
+
+   For Windows
    ```bash
    # Start all services using Docker Compose
    docker-compose -f docker/docker-compose.yml up
    
-   # Start all services using Docker Compose
+   # 2. Run API service
    air -c cmd/api/.air.toml
 
 
    # 3. Run worker service (If working on worker)
    air -c cmd/worker/.air.toml
+   ```
+   
+   For macOS/Linux
+   ```bash
+   # Start all services using Docker Compose
+   docker-compose -f docker/docker-compose.yml up
+   
+   # 2. Run API service
+   air -c cmd/api/.air.toml --build.cmd "go build -o ./tmp/api ./cmd/api" --build.bin="./tmp/api"
+
+   # 3. Run worker service (If working on worker)
+   air -c cmd/worker/.air.toml --build.cmd "go build -o ./tmp/worker ./cmd/worker" --build.bin="./tmp/worker"
    ```
 
    Alternatively, you can use the Makefile:
