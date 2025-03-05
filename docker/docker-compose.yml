@@ -1,58 +1,6 @@
 version: '3.8'
 
 services:
-  api:
-    build:
-      context: ..
-      dockerfile: api/Dockerfile
-    container_name: ecom-api
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-      - redis
-      - rabbitmq
-    environment:
-      - APP_DATABASE_HOST=postgres
-      - APP_DATABASE_PORT=5432
-      - APP_DATABASE_NAME=ecomdb
-      - APP_DATABASE_USER=ecomuser
-      - APP_DATABASE_PASSWORD=ecompassword
-      - APP_DATABASE_SSLMODE=disable
-      - APP_REDIS_HOST=redis
-      - APP_REDIS_PORT=6379
-      - APP_RABBITMQ_HOST=rabbitmq
-      - APP_RABBITMQ_PORT=5672
-      - APP_SERVER_PORT=8080
-    restart: unless-stopped
-    networks:
-      - ecom-network
-
-  worker:
-    build:
-      context: ..
-      dockerfile: worker/Dockerfile
-    container_name: ecom-worker
-    depends_on:
-      - postgres
-      - redis
-      - rabbitmq
-    environment:
-      - APP_DATABASE_HOST=postgres
-      - APP_DATABASE_PORT=5432
-      - APP_DATABASE_NAME=ecomdb
-      - APP_DATABASE_USER=ecomuser
-      - APP_DATABASE_PASSWORD=ecompassword
-      - APP_DATABASE_SSLMODE=disable
-      - APP_REDIS_HOST=redis
-      - APP_REDIS_PORT=6379
-      - APP_RABBITMQ_HOST=rabbitmq
-      - APP_RABBITMQ_PORT=5672
-      - APP_SERVER_PORT=8080
-    restart: unless-stopped
-    networks:
-      - ecom-network
-
   postgres:
     image: postgres:15
     container_name: ecom-postgres
@@ -93,4 +41,3 @@ networks:
 
 volumes:
   postgres-data:
-  # Using default volume driver

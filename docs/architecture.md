@@ -17,8 +17,10 @@ This project serves as an introduction to these architectural concepts. For more
 ecommerce-api/
 ├── cmd/                    # Application entry points
 │   ├── api/                # API entry point
+│   │   ├── .air.toml       # Configuration for hot-reload with air server
 │   │   └── main.go
-│   ├── worker/             # Worker entry point  
+│   ├── worker/             # Worker entry point
+│   │   ├── .air.toml       # Configuration for hot-reload with air server
 │   │   └── main.go
 ├── internal/               # Private application code
 │   ├── models/             # Domain models/entities
@@ -58,7 +60,7 @@ ecommerce-api/
 │   │   └── Dockerfile     # API service Dockerfile
 │   ├── worker/
 │   │   └── Dockerfile     # Worker service Dockerfile
-│   └── docker-compose.yml # Docker Compose for local development
+│   └── docker-compose.yml # Docker Compose for local development dependencies (PostgreSQL, RabitMQ, Redis)
 ├── infra/                 # Infrastructure and deployment
 │   ├── k8s/               # Common Kubernetes resources
 │   │   ├── db.yaml

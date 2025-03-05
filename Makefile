@@ -11,21 +11,23 @@ build:
 	go build -o $(BIN_DIR)/api $(CMD_DIR)/api/main.go
 	go build -o $(BIN_DIR)/worker $(CMD_DIR)/worker/main.go
 
-# Run API service
-run-api:
-	go run $(CMD_DIR)/api/main.go
 
-# Run worker service
-run-worker:
-	go run $(CMD_DIR)/worker/main.go
-
-# Start Docker containers
-docker-up:
+# Development with hot reload
+# 1. Start dependencies (PostgreSQL, Redis, RabbitMQ) in Docker
+deps-up:
 	docker compose -f $(DOCKER_COMPOSE) up -d
 
-# Stop Docker containers
-docker-down:
-	docker compose -f $(DOCKER_COMPOSE) down
+# 2. Run API service
+run-api:
+	air -c $(CMD_DIR)/api/.air.toml
+
+# 3. Run worker service (If working on worker)
+run-worker:
+	air -c $(CMD_DIR)/worker/.air.toml
+
+# Stop dependencies (PostgreSQL, Redis, RabbitMQ)
+deps-up:
+	docker compose -f $(DOCKER_COMPOSE) down -d
 
 # Format code
 fmt:
@@ -43,12 +45,11 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  build          - Build the project binaries"
+	@echo "  deps-up        - Start all dependencies"
 	@echo "  run-api        - Run the API service"
 	@echo "  run-worker     - Run the worker service"
-	@echo "  docker-up      - Start dependency containers"
-	@echo "  docker-down    - Stop dependency containers"
 	@echo "  fmt            - Format code"
 	@echo "  deps           - Install dependencies"
 	@echo "  clean          - Clean build artifacts"
 
-.PHONY: build run-api run-worker docker-up docker-down fmt deps clean help
+.PHONY: build deps-up run-api run-worker fmt deps clean help

@@ -27,3 +27,6 @@ go.work.sum
 .idea/
 
 config.yaml
+cmd/api/tmp
+cmd/worker/tmp
+tmp

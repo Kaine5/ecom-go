@@ -42,18 +42,25 @@ This project is designed as a learning resource for Golang development, focusing
    ```bash
    # Start all services using Docker Compose
    docker-compose -f docker/docker-compose.yml up
+   
+   # Start all services using Docker Compose
+   air -c cmd/api/.air.toml
 
-   # To run in detached mode
-   docker-compose -f docker/docker-compose.yml up -d
+
+   # 3. Run worker service (If working on worker)
+   air -c cmd/worker/.air.toml
    ```
 
    Alternatively, you can use the Makefile:
    ```bash
-   # Start the Docker containers
-   make docker-up
-
-   # Stop the Docker containers
-   make docker-down
+   # Start all services using Docker Compose
+   make deps-up
+   
+   # Run API service
+   make run-api
+   
+   # Run worker service
+   make run-worker
    ```
 
 ### Deployment Options

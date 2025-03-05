@@ -6,7 +6,7 @@ database:
   port: 5432
   name: ecomdb
   user: ecomuser
-  password: ecompass
+  password: ecompassword
   sslmode: disable
 
 redis:
