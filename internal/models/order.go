@@ -7,9 +7,9 @@ type OrderItem struct {
 }
 
 type Order struct {
-	ID         int         `json:"id"`
+	ID         int         `json:"id" gorm:"primaryKey;autoIncrement"`
 	UserID     int         `json:"user_id"`
-	Products   []OrderItem `json:"products"` // List of products with quantity and price
+	Products   []OrderItem `json:"products" gorm:"foreignKey:ProductID"` // List of products with quantity and price
 	TotalPrice float64     `json:"total_price"`
 	Status     string      `json:"status"` // e.g., "pending", "completed", "canceled"
 	CreatedAt  string      `json:"created_at"`
