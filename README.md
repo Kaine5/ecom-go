@@ -43,6 +43,8 @@ This project is designed as a learning resource for Golang development, focusing
 
    For Windows
    ```bash
+    cp config.sample.yaml config.yaml
+   
    # Start all services using Docker Compose
    docker-compose -f docker/docker-compose.yml up
    
@@ -56,6 +58,8 @@ This project is designed as a learning resource for Golang development, focusing
    
    For macOS/Linux
    ```bash
+    cp config.sample.yaml config.yaml
+
    # Start all services using Docker Compose
    docker-compose -f docker/docker-compose.yml up
    
