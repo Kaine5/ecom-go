@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"ecom-go/internal/config"
+
 	"gorm.io/gorm"
 )
 
@@ -12,8 +13,8 @@ type Factory struct {
 	db   *gorm.DB
 	User UserRepository
 	// Add other repositories here as you implement them
-	// Product ProductRepository
-	// Order   OrderRepository
+	Product ProductRepository
+	Order   OrderRepository
 }
 
 // NewFactory creates a new repository factory
