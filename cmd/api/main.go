@@ -15,6 +15,7 @@ import (
 	"ecom-go/internal/repository"
 	"ecom-go/internal/service"
 	"ecom-go/pkg/logger"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -39,7 +40,8 @@ func main() {
 	// Set up services
 	userService := service.NewUserService(repoFactory.User)
 	// TODO: Add other services here
-
+	productService := service.NewProductService(repoFactory.Product)
+	// orderService := service.NewOrderService(repoFactory.Order)
 	// Set up HTTP server with Gin
 	router := setupRouter()
 
@@ -48,7 +50,8 @@ func main() {
 	userHandler := handler.NewUserHandler(userService)
 	userHandler.Register(api)
 	// TODO: Add other handlers here
-
+	productHandler := handler.NewProductHandler((productService))
+	productHandler.Register(api)
 	// Create HTTP server
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.Server.Port),

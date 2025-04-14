@@ -32,8 +32,10 @@ func NewFactory(cfg *config.Config) (*Factory, error) {
 
 	// Create repository instances
 	return &Factory{
-		db:   db,
-		User: NewUserRepo(db),
+		db:      db,
+		User:    NewUserRepo(db),
+		Product: NewProductRepo(db),
+		Order:   NewOrderRepo(db),
 		// Initialize other repositories here as you implement them
 	}, nil
 }

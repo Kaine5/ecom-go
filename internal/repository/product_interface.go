@@ -26,6 +26,6 @@ type ProductRepository interface {
 	// Count returns the total number of products
 	Count(ctx context.Context) (int64, error)
 
-	// ListWithPagination retrieves products with pagination
-	ListWithPagination(ctx context.Context, offset, limit int) ([]*models.Product, error)
+	// // ListWithPagination retrieves products with pagination
+	// ListWithPagination(ctx context.Context, offset, limit int) ([]*models.Product, error)
 }
