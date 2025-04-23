@@ -41,7 +41,7 @@ func main() {
 	userService := service.NewUserService(repoFactory.User)
 	// TODO: Add other services here
 	productService := service.NewProductService(repoFactory.Product)
-	// orderService := service.NewOrderService(repoFactory.Order)
+	orderService := service.NewOrderService(repoFactory.Order)
 	// Set up HTTP server with Gin
 	router := setupRouter()
 
@@ -52,6 +52,8 @@ func main() {
 	// TODO: Add other handlers here
 	productHandler := handler.NewProductHandler((productService))
 	productHandler.Register(api)
+	orderHandler := handler.NewOrderHandler((orderService))
+	orderHandler.Register(api)
 	// Create HTTP server
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", cfg.Server.Port),

@@ -45,7 +45,7 @@ func (r *OrderRepo) GetByID(ctx context.Context, id int) (*models.Order, error) 
 // List retrieves orders with pagination
 func (r *OrderRepo) List(ctx context.Context, offset, limit int) ([]*models.Order, error) {
 	var orders []*models.Order
-	result := r.db.WithContext(ctx).Offset(offset).Limit(limit).Find(&orders)
+	result := r.db.WithContext(ctx).Offset(offset).Limit(limit).Preload("Products").Find(&orders)
 	if result.Error != nil {
 		return nil, result.Error
 	}

@@ -6,6 +6,7 @@ import (
 
 // CreateOrderDTO represents the input for creating a new order
 type CreateOrderDTO struct {
+	UserID   int                `json:"user_id" binding:"required"`
 	Products []models.OrderItem `json:"products" binding:"required"`
 }
 

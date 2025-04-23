@@ -1,17 +1,20 @@
 package models
 
+import "time"
+
 type OrderItem struct {
-	ProductID int     `json:"product_id"`
-	Quantity  int     `json:"quantity"`
-	Price     float64 `json:"price"` // Price at the time of order
+	OrderItemID    int `json:"order_item_id" gorm:"uniqueIndex;primaryKey;autoIncrement"`
+	ProductID      int `json:"product_id"`
+	RelatedOrderID int `json:"order_id"`
+	Quantity       int `json:"quantity"`
 }
 
 type Order struct {
-	ID         int         `json:"id" gorm:"primaryKey;autoIncrement"`
+	OrderID    int         `json:"id" gorm:"uniqueIndex;primaryKey;autoIncrement"`
 	UserID     int         `json:"user_id"`
-	Products   []OrderItem `json:"products" gorm:"foreignKey:ProductID"` // List of products with quantity and price
+	Products   []OrderItem `json:"products" gorm:"foreignKey:RelatedOrderID"` // List of products with quantity and price
 	TotalPrice float64     `json:"total_price"`
-	Status     string      `json:"status"` // e.g., "pending", "completed", "canceled"
-	CreatedAt  string      `json:"created_at"`
-	UpdatedAt  string      `json:"updated_at"`
+	Status     string      `json:"status" gorm:"default:pending"` // e.g., "pending", "completed", "canceled"
+	CreatedAt  time.Time   `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt  time.Time   `json:"updated_at" gorm:"autoUpdateTime"`
 }
